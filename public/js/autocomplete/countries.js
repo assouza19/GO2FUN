@@ -1,0 +1,17 @@
+﻿var countries = {
+    "RE": "Restaurante",
+    "BR": "Barzinho",
+    "SH": "Show",
+    "TE": "Teatro",
+    "CI": "Cinema",
+    "PI": "Pizzaria",
+    "FF": "Fast Food",
+    "CH": "Chopperia",
+    "LA": "Lanchonete",
+    "BA": "Balada",
+    "FE": "Festival",
+    "MU": "Museu",
+    "EX": "Exposição",
+    "FE": "Feira",
+    "JO": "Jogos",
+}
