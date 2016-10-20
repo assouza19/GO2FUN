@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('user/details/{idevento}', 'Users@details');
   Route::get('user/profile', 'Users@profile');
   Route::get('user/logout', 'Users@logout');
+  Route::get('user/confirm/{id}&{idevento}&{idanunciante}', 'Users@confirmPresence');
 });
 
 // Rotas anunciante
@@ -57,4 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('anunciante/manager/event', 'AnuncianteController@ManagerEvent');
   Route::get('anunciante/chart/users', 'AnuncianteController@ChartUsers');
   Route::get('anunciante/chart/event', 'AnuncianteController@ChartEvents');
+  Route::post('anunciante/new/event', 'AnuncianteController@RegisterEvent');
+  Route::get('anunciante/logout', 'AnuncianteController@logout');
+  Route::get('anunciante/details/{idanunciante}/{idevento}', 'AnuncianteController@details');
 });

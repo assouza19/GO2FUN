@@ -23,7 +23,7 @@
             </div>
             <div class="x_content">
               <br />
-              <form id="defaultForm" method="post" class="form-horizontal" action="{{ url('anunciante/register') }}">
+              <form id="defaultForm" method="post" class="form-horizontal" action="{{ url('anunciante/new/event') }}">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Nome do evento</label>
@@ -34,10 +34,10 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Data:(Início e Fim)</label>
                         <div class="col-sm-3">
-                            <input type="date" class="form-control" name="cpf" placeholder="Data Início"/>
+                            <input type="date" class="form-control" name="dataInicio" placeholder="Data Início"/>
                         </div>
                         <div class="col-sm-2">
-                            <input type="date" class="form-control" name="cpf" placeholder="Data Fim"/>
+                            <input type="date" class="form-control" name="dataFim" placeholder="Data Fim"/>
                         </div>
                     </div>
 
@@ -55,9 +55,9 @@
                   </div>
 
                   <div class="form-group">
-                      <label class="col-sm-3 control-label">Período</label>
+                      <label class="col-sm-3 control-label" >Período</label>
                       <div class="col-sm-5">
-                        <select  class="selectpicker " data-style="btn-primary">
+                        <select  class="selectpicker " name="periodo" data-style="btn-primary">
                           <option value="M" >Manhã</option>
                           <option value="T">Tarde</option>
                           <option value="N">Noite</option>
@@ -68,8 +68,8 @@
                   <div class="form-group">
                       <label class="col-sm-3 control-label">Categoria</label>
                       <div class="col-sm-9">
-                        <select  class="selectpicker " multiple data-style="btn-primary">
-                          <option >Categoria</option>
+                        <select  class="selectpicker " name="categoria" data-style="btn-primary">
+                          <option value="0" >Categoria</option>
                           <option value="10" >Balada</option>
                           <optionvalue="2">Barzinho</option>
                           <option value="8">Chopperia</option>
@@ -98,35 +98,28 @@
                   <div class="form-group">
                       <label class="col-sm-3 control-label">Rua</label>
                       <div class="col-sm-5">
-                          <input name="rua" type="text" class="form-control" size="65" id="rua" disabled/>
+                          <input name="rua" type="text" class="form-control" size="65" id="rua" />
                       </div>
                   </div>
 
                   <div class="form-group">
                       <label class="col-sm-3 control-label">Bairro</label>
                       <div class="col-sm-5">
-                          <input name="bairro" type="text" class="form-control" size="65" id="bairro" disabled/>
+                          <input name="bairro" type="text" class="form-control" size="65" id="bairro" />
                       </div>
                   </div>
 
                   <div class="form-group">
                       <label class="col-sm-3 control-label">Cidade</label>
                       <div class="col-sm-5">
-                          <input type="text"  id="cidade" name="cidade" class="form-control" size="65" disabled/>
+                          <input type="text"  id="cidade" name="cidade" class="form-control" size="65" />
                       </div>
                   </div>
 
                   <div class="form-group">
                       <label class="col-sm-3 control-label">Estado</label>
                       <div class="col-sm-5">
-                          <input type="text"  id="uf" class="form-control" size="65" name="uf" disabled/>
-                      </div>
-                  </div>
-
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Email</label>
-                      <div class="col-sm-5">
-                          <input type="text" class="form-control" name="email" placeholder="email"/>
+                          <input type="text"  id="uf" class="form-control" size="65" name="uf" />
                       </div>
                   </div>
 

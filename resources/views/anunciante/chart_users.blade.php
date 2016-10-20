@@ -2,388 +2,126 @@
 
 @section('content')
       <!-- CONTEUDO -->
-      <div class="right_col" role="main">
-
-              <div class="">
-                <div class="page-title">
-                  <div class="title_left">
-                    <h3>
-                          Echarts
-                          <small>
-                              Some examples to get you started
-                          </small>
-                      </h3>
-                  </div>
-
-                  <div class="title_right">
-                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                      <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                                  <button class="btn btn-default" type="button">Go!</button>
-                              </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-
-                <div class="row">
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Bar Graph</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-
-                        <div id="mainb" style="height:350px;"></div>
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Mini Pie</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-
-                        <div id="echart_mini_pie" style="height:350px;"></div>
-
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Pie Graph</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-
-                        <div id="echart_pie" style="height:350px;"></div>
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Pie Area</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-
-                        <div id="echart_pie2" style="height:350px;"></div>
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Donut Graph</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-
-                        <div id="echart_donut" style="height:350px;"></div>
-
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Scatter Graph</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-
-                        <div id="echart_scatter" style="height:350px;"></div>
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Line Graph</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-
-                        <div id="echart_line" style="height:350px;"></div>
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Horizontal Bar</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-
-                        <div id="echart_bar_horizontal" style="height:370px;"></div>
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>World Map</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-
-                        <div id="echart_world_map" style="height:370px;"></div>
-
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Pyramid</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-
-                        <div id="echart_pyramid" style="height:370px;"></div>
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Sonar</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-
-                        <div id="echart_sonar" style="height:370px;"></div>
-
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Guage</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-
-                        <div id="echart_guage" style="height:370px;"></div>
-
-                      </div>
-                    </div>
-                  </div>
-
-
+  <div class="right_col" role="main">
+        <div class="row line-row">
+            <div class="hr">&nbsp;</div>
+        </div>
+        <h3 align="center"> Relatórios - Usuários </h3>
+        <div class="row line-row">
+            <div class="hr">&nbsp;</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Bar Graph <small>Sessions</small></h2>
+                  <canvas id="myChart"  width="400" height="400"></canvas>
                 </div>
               </div>
-            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Bar Graph <small>Sessions</small></h2>
+                  <canvas id="myChart2"  width="400" height="400"></canvas>
+                </div>
+              </div>
+          </div>
+        </div>
+  </div>
+
+
+        <script>
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                },
+                options: {
+                  responsive: true
+                },
+                title: {
+                   display: true,
+                   text: 'Custom Chart Title'
+                }
+            }
+        });
+        </script>
+        <script>
+        var ctx = document.getElementById("myChart2");
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                },
+                options: {
+                  responsive: true
+                },
+                title: {
+                   display: true,
+                   text: 'Custom Chart Title'
+                }
+            }
+        });
+        </script>
 
 @endsection

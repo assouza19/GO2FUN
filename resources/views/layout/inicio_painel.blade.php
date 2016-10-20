@@ -150,7 +150,7 @@
                     <!-- /sidebar menu -->
                 </div>
                 </div>
-                    @endif
+              
     @yield('content')
     <!-- FIM DO CONTEÚDO -->
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB, Auth, Redirect;
 use App\User;
+use App\Evento;
 use App\Anunciante;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
@@ -21,8 +22,7 @@ class AnuncianteController   extends Controller
         'password'  => Input::get('password')
     );
     // attempt to do the login
-    if (Auth::guard('anunciante')->attempt($userdata)) {
-      Auth::login($userdata);
+    if (Auth::attempt($userdata)) {
       return redirect('anunciante/home');
 
     } else {
@@ -65,7 +65,6 @@ class AnuncianteController   extends Controller
 }
 
     public function index(){
-
       $id = DB::table('anunciantes')->where( 'anunciantes.email' , '=', Auth::user()->email )->first();
       $total = DB::table('eventos')
           ->where('eventos.idanunciante','=',$id->idanunciante)
@@ -81,8 +80,40 @@ class AnuncianteController   extends Controller
       ->groupBy('eventos.nome','eventos.dataInicio')
       ->take(5)
       ->get();
-      return view('anunciante.home')->with('total', $total)->with('conf', $conf)->with('detalhes', $detalhes);
+      $avaliacoes = DB::table('avaliacoes')
+      ->select(array('eventos.nome',  'avaliacoes.*', 'usuarios.name'))
+      ->where('avaliacoes.idanunciante','=',$id->idanunciante)
+      ->join('eventos','eventos.idevento', '=', 'avaliacoes.idEvento')
+      ->join('usuarios','avaliacoes.idUsuario', '=', 'usuarios.id')
+      ->orderBy('avaliacoes.data')
+      ->take(5)
+      ->get();
+      $seguidores = DB::table('seguidores')
+      ->where('seguidores.idAnunciante','=',$id->idanunciante)
+      ->count();
+      // dd($avaliacoes);
+      // exit();
+      return view('anunciante.home')->with('total', $total)->with('conf', $conf)
+      ->with('detalhes', $detalhes)->with('avaliacoes', $avaliacoes)
+      ->with('seguidores', $seguidores);
 
+    }
+
+    public function details($idanunciante,$idevento){
+      $id = DB::table('anunciantes')->where( 'anunciantes.email' , '=', Auth::user()->email )->first();
+      if($idanunciante ==  $id->idanunciante){
+      $evento = DB::table('eventos')
+          ->join('categorias', 'eventos.idCategoria', '=', 'categorias.idCategoria')
+          ->join('anunciantes', 'eventos.idAnunciante', '=', 'anunciantes.idanunciante')
+          ->join('classificacao', 'eventos.idClassificacao', '=', 'classificacao.idClassificacao')
+          ->join('subcategorias', 'eventos.idSubCat', '=', 'subcategorias.idsubcategoria')
+          ->where('eventos.idevento','=',$idevento)
+          ->select('eventos.*', 'categorias.descricaoCategoria', 'classificacao.descricao_classif', 'anunciantes.nomeFantasia', 'anunciantes.cnpj','anunciantes.razaosocial', 'anunciantes.telefone','anunciantes.email', 'subcategorias.descricaosubcat')
+          ->get();
+      return view('anunciante.details')->with('evento', $evento);
+      }
+        Auth::logout();
+        return redirect('/');
     }
 
     public function PagEvento(){
@@ -95,5 +126,42 @@ class AnuncianteController   extends Controller
     }
     public function ChartEvents(){
       return view('anunciante.chart_events');
+    }
+
+    public function managerEvent() {
+
+    }
+
+    public function RegisterEvent(Request $request){
+      $data = $request->all();
+      $id = DB::table('anunciantes')->where( 'anunciantes.email' , '=', Auth::user()->email )->first();
+      if( $data ) {
+          $evento = new Evento;
+          $evento->nome = $data['name'];
+          $evento->dataInicio = $data['dataInicio'];
+          $evento->dataFim = $data['dataFim'];
+          $evento->periodo = $data['periodo'];
+          $evento->idAnunciante = $id->idanunciante;
+
+          // $evento->idCategoria= $data['categoria'];
+          $evento->descricao= $data['descricao'];
+          $evento->logradouro = $data['rua'];
+          $evento->cep = $data['cep'];
+          $evento->bairro = $data['bairro'];
+          $evento->cidade = $data['cidade'];
+          $evento->estado = $data['uf'];
+          $evento->valor = $data['valor'];
+            if( $evento->save() ) {
+              return Redirect('anunciante/home');
+            }
+            dd('nao ok');
+            exit();
+      }
+
+    }
+
+    public function logout(){
+      Auth::logout();
+      return Redirect('/');
     }
 }

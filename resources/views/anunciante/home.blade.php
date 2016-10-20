@@ -17,7 +17,7 @@
             <div class="left"></div>
             <div class="right">
               <span class="count_top"><i class="fa fa-clock-o"> Total Seguidores</i> </span>
-              <div class="count">123.50</div>
+              <div class="count">{!! $seguidores !!}</div>
             </div>
           </div>
           <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
@@ -55,74 +55,52 @@
 
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="x_panel tile fixed_height_320">
-              <div class="x_title">
-                <h2>Últimos eventos</h2>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <h4>Total Confirmados por evento</h4>
-                <?php foreach ($detalhes as $detalhes): ?>
-                <div class="widget_summary">
-                  
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Bar Graph <small>Sessions</small></h2>
+                  <canvas id="myChart"  width="400" height="400"></canvas>
                 </div>
-                <?php endforeach; ?>
               </div>
-            </div>
           </div>
 
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="x_panel tile fixed_height_320 overflow_hidden">
-              <div class="x_title">
-                <h2>Faixa de idades</h2>
-
-                <div class="clearfix"></div>
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Bar Graph <small>Sessions</small></h2>
+                  <canvas id="myChart2"  width="400" height="400"></canvas>
+                </div>
               </div>
-              <div class="x_content">
-
-                <table class="" style="width:100%">
-                  <tr>
-                    <th style="width:37%;">
-                      <p>Proporção</p>
-                    </th>
-                    <th>
-                      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                        <p class="">Faixas</p>
-                      </div>
-                      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                        <p class="">Percentual</p>
-                      </div>
-                    </th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <canvas id="canvas1" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
-                    </td>
-                    <td>
-                      <table class="tile_info">
-                        <tr>
-                          <td>
-                            <p><i class="fa fa-square blue"></i>Até 18 anos</p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p><i class="fa fa-square green"></i>Entre 19 e 30 anos </p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p><i class="fa fa-square purple"></i>Acima de 30 </p>
-                          </td>
-                        </tr>
-
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
           </div>
+        </div>
+
+       <div class="x_panel">
+         <div class="x_title">
+           <h2>Últimas avaliações</h2>
+           <div class="clearfix"></div>
+         </div>
+         <div class="x_content">
+           <ul class="list-unstyled msg_list">
+             <?php foreach ($avaliacoes as $avaliacoes): ?>
+             <li>
+               <a href="{{url('anunciante/details')}}/{!!$avaliacoes->idAnunciante!!}/{!!$avaliacoes->idEvento!!}">
+                 <span class="image">
+                   <img src="/images/pic.jpg" alt="img" />
+                 </span>
+                 <span>
+                     <span>{!!$avaliacoes->name!!} <small> {!!$avaliacoes->nome!!} </small></span>
+                 </span>
+                 <span class="message">
+                     {!!$avaliacoes->avaliacao!!}
+                 </span>
+               </a>
+             </li>
+            <?php endforeach; ?>
+           </ul>
+         </div>
+       </div>
+     </div>
+
+
 		      </div>
           </div>
           </div>
@@ -131,5 +109,50 @@
         </div>
         </div>
 
-
+        <script>
+         var ctx = document.getElementById("myChart");
+         var myChart = new Chart(ctx, {
+             type: 'doughnut',
+             data: {
+                 labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                 datasets: [{
+                     label: '# of Votes',
+                     data: [12, 19, 3, 5, 2, 3],
+                     backgroundColor: [
+                         'rgba(255, 99, 132, 0.2)',
+                         'rgba(54, 162, 235, 0.2)',
+                         'rgba(255, 206, 86, 0.2)',
+                         'rgba(75, 192, 192, 0.2)',
+                         'rgba(153, 102, 255, 0.2)',
+                         'rgba(255, 159, 64, 0.2)'
+                     ],
+                     borderColor: [
+                         'rgba(255,99,132,1)',
+                         'rgba(54, 162, 235, 1)',
+                         'rgba(255, 206, 86, 1)',
+                         'rgba(75, 192, 192, 1)',
+                         'rgba(153, 102, 255, 1)',
+                         'rgba(255, 159, 64, 1)'
+                     ],
+                     borderWidth: 1
+                 }]
+             },
+             options: {
+                 scales: {
+                     yAxes: [{
+                         ticks: {
+                             beginAtZero:true
+                         }
+                     }]
+                 },
+                 options: {
+                   responsive: true
+                 },
+                 title: {
+                    display: true,
+                    text: 'Custom Chart Title'
+                 }
+             }
+         });
+         </script>
 @endsection

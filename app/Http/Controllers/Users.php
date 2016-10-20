@@ -112,6 +112,7 @@ class Users extends Controller
     DB::table('confirmados')->insert(
     ['id_usuario' => $id, 'id_evento' => $idevento, 'id_anunciante'=> $idanunciante]
     );
+    return Redirect('user/home');
 
   }
 
