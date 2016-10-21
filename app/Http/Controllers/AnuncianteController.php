@@ -129,7 +129,13 @@ class AnuncianteController   extends Controller
     }
 
     public function managerEvent() {
-
+      $id = DB::table('anunciantes')->where( 'anunciantes.email' , '=', Auth::user()->email )->first();
+      $eventos = DB::table('eventos')
+          ->where('eventos.idAnunciante','=',$id->idanunciante)
+          ->get();
+          // dd($eventos);
+          // exit();
+        return view('anunciante.ger_eventos')->with('eventos', $eventos);
     }
 
     public function RegisterEvent(Request $request){

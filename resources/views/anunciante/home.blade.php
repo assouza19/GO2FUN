@@ -16,7 +16,7 @@
           <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
             <div class="left"></div>
             <div class="right">
-              <span class="count_top"><i class="fa fa-clock-o"> Total Seguidores</i> </span>
+              <span class="count_top"><i class="fa fa-clock-o"></i>  Total Seguidores</span>
               <div class="count">{!! $seguidores !!}</div>
             </div>
           </div>
@@ -39,7 +39,6 @@
             <div class="right">
               <span class="count_top"><i class="fa fa-user"></i> Total Confirmados</span>
               <div class="count">{!!$conf!!}</div>
-
             </div>
           </div>
           <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">

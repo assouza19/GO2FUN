@@ -70,26 +70,6 @@
           <div id="notif-group" class="tabbed_notifications"></div>
         </div>
 
-        <script src="js/custom.js"></script>
-
-
-        <!-- Datatables -->
-        <!-- <script src="js/datatables/js/jquery.dataTables.js"></script>
-  <script src="js/datatables/tools/js/dataTables.tableTools.js"></script> -->
-
-        <!-- Datatables-->
-        <script src="js/datatables/jquery.dataTables.min.js"></script>
-        <script src="js/datatables/dataTables.bootstrap.js"></script>
-        <script src="js/datatables/dataTables.buttons.min.js"></script>
-        <script src="js/datatables/buttons.bootstrap.min.js"></script>
-        <script src="js/datatables/jszip.min.js"></script>
-        <script src="js/datatables/pdfmake.min.js"></script>
-        <script src="js/datatables/vfs_fonts.js"></script>
-        <script src="js/datatables/buttons.html5.min.js"></script>
-        <script src="js/datatables/buttons.print.min.js"></script>
-        <script src="js/datatables/dataTables.responsive.min.js"></script>
-        <script src="js/datatables/responsive.bootstrap.min.js"></script>
-        <script src="js/datatables/dataTables.scroller.min.js"></script>
 
 
         <!-- pace -->
@@ -127,24 +107,5 @@
               }
             }();
         </script>
-        <script type="text/javascript">
-          $(document).ready(function() {
-            $('#datatable').dataTable();
-            $('#datatable-keytable').DataTable({
-              keys: true
-            });
-            $('#datatable-responsive').DataTable();
-            $('#datatable-scroller').DataTable({
-              ajax: "js/datatables/json/scroller-demo.json",
-              deferRender: true,
-              scrollY: 380,
-              scrollCollapse: true,
-              scroller: true
-            });
-            var table = $('#datatable-fixed-header').DataTable({
-              fixedHeader: true
-            });
-          });
-          TableManageButtons.init();
-        </script>
+
 @endsection

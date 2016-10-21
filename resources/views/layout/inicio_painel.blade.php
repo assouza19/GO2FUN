@@ -150,7 +150,7 @@
                     <!-- /sidebar menu -->
                 </div>
                 </div>
-              
+
     @yield('content')
     <!-- FIM DO CONTEÚDO -->
 
@@ -162,11 +162,6 @@
     <div class="clearfix"></div>
   </footer>
 
-    <!-- Scripts -->
-  <script src="/js/jquery.min.js"></script>
-  <!-- gauge js -->
-  <script type="text/javascript" src="/js/gauge/gauge.min.js"></script>
-  <script type="text/javascript" src="/js/gauge/gauge_demo.js"></script>
   <!-- bootstrap progress js -->
   <script src="/js/progressbar/bootstrap-progressbar.min.js"></script>
   <script src="/js/nicescroll/jquery.nicescroll.min.js"></script>
@@ -282,25 +277,6 @@
   <script type="text/javascript" src="js/maps/jquery-jvectormap-us-aea-en.js"></script>
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
-  <script>
-    $(function() {
-      $('#world-map-gdp').vectorMap({
-        map: 'world_mill_en',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        series: {
-          regions: [{
-            values: gdpData,
-            scale: ['#E6F2F0', '#149B7E'],
-            normalizeFunction: 'polynomial'
-          }]
-        },
-        onRegionTipShow: function(e, el, code) {
-          el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
-        }
-      });
-    });
-  </script>
 
   <!-- dashbord linegraph -->
   <script>

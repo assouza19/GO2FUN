@@ -172,7 +172,7 @@
                   <li>
                     <a href="javascript:;">Ajuda</a>
                   </li>
-                  <li><a href="logoff_redireciona.html"><i class="fa fa-sign-out pull-right"></i> SAIR</a>
+                  <li><a href="{{url('anunciante/logout')}}"><i class="fa fa-sign-out pull-right"></i> SAIR</a>
                   </li>
                 </ul>
               </li>
@@ -231,15 +231,6 @@
             </div>
           </div>
 
-          <!-- bootstrap progress js -->
-          <script src="/js/progressbar/bootstrap-progressbar.min.js"></script>
-          <script src="/js/nicescroll/jquery.nicescroll.min.js"></script>
-          <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
-          <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
-          <!-- icheck -->
-          <script src="/js/icheck/icheck.min.js"></script>
-          <!-- daterangepicker -->
-          <script type="text/javascript" src="/js/moment/moment.min.js"></script>
           <script src="/js/custom.js"></script>
 
             <script type="text/javascript">
@@ -291,8 +282,6 @@
                                 notEmpty: {
                                     message: 'O campo CNPJ é requerido'
                                 },
-
-
                                 stringLength: {
                                     min: 8,
                                     max: 15,
@@ -304,14 +293,13 @@
                                 }
                             }
                         },
+
           							cpf: {
                             message: 'Este CPF é inválido',
                             validators: {
                                 notEmpty: {
                                     message: 'O campo CPF é requerido'
                                 },
-
-
                                 stringLength: {
                                     min: 8,
                                     max: 12,
@@ -329,8 +317,6 @@
                                 notEmpty: {
                                     message: 'O campo CEP é requerido'
                                 },
-
-
                                 stringLength: {
                                     min: 8,
                                     max: 12,
@@ -339,6 +325,23 @@
                                 regexp: {
                                     regexp: /^[Z0-9_\.]+$/,
                                     message: 'O CEP é composto apenas de números.'
+                                }
+                            }
+                        },
+                        valor: {
+                            message: 'Este telefone é inválido',
+                            validators: {
+                                notEmpty: {
+                                    message: 'O campo telefone é requerido'
+                                },
+                                stringLength: {
+                                    min: 8,
+                                    max: 12,
+                                    message: 'O telefone deverá possuir entre 8 e 12 números.'
+                                },
+                                regexp: {
+                                    regexp: /^[Z0-9_\.]+$/,
+                                    message: 'O telefone é composto apenas de números.'
                                 }
                             }
                         },

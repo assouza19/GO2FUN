@@ -26,10 +26,13 @@ class Users extends Controller
         );
         // attempt to do the login
         if (Auth::attempt($userdata)) {
+          // dd('sim');
+          // exit();
+            dd('sim');
+            exit();
             // Auth::login($userdata);
             return redirect('user/home');
-        } else {
-            // validation not successful, send back to form
+          }
             return Redirect::to('user/login');
         }
     }
@@ -121,6 +124,8 @@ class Users extends Controller
       $email = Auth::user()->email;
       $usuario = DB::table('usuarios')
       ->where('email', '=', $email)->get();
+      dd(Auth::user()->email);
+      exit();
         return view('user/profile')->with('usuario', $usuario);
     }
 
