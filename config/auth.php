@@ -44,10 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'anunciante' => [
-            'driver' => 'session',
-            'provider' => 'anunciante',
-        ],
+//        'anunciante' => [
+//            'driver' => 'session',
+//            'provider' => 'anunciante',
+//        ],
 
         'api' => [
             'driver' => 'token',
@@ -75,12 +75,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\User::class,
         ],
-        'anunciante' => [
-            'driver' => 'eloquent',
-            'model' => App\Anunciante::class,
-        ],
+//        'anunciante' => [
+//            'driver' => 'eloquent',
+//            'model' => App\Anunciante::class,
+//        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -110,11 +110,11 @@ return [
             'expire' => 60,
         ],
 
-        'anunciante' => [
-            'provider' => 'anunciante',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
+//        'anunciante' => [
+//            'provider' => 'anunciante',
+//            'table' => 'password_resets',
+//            'expire' => 60,
+//        ],
     ],
 
 ];

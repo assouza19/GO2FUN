@@ -66,7 +66,7 @@
 			<div class="row line-row">
 				<div class="hr">&nbsp;</div>
 			</div>
-			<div v-for="event in events | filterBy search in ('nome') | filterBy selected in ('descricaoCategoria') |  orderBy 'nome'">
+			<div v-for="event in events | filterBy search in ('nome') | filterBy selected in ('descricaoCategoria') | orderBy 'nome'">
 				<div>
 					<div class="col-sm-6 col-md-4">
 						<div class="thumbnail">
@@ -91,26 +91,14 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.min.js"></script>
 	<script>
 		new Vue({
-		  el: '#app',
+			el: '#app',
+			data: {
+				events: [<?= json_encode($tudo) ?>]
+			},
 
- data: {
-	 events: []
- },
+ 			methods: {
 
-
- ready() {
-	 // Initialize data
-	 this.fetchData()
- },
-
-
- methods: {
-
-	 fetchData() {
-
-		 this.events =  <?= json_encode($tudo) ?>;
-	 }
- }
+ 			}
 		});
 	</script>
 

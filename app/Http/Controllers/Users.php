@@ -14,26 +14,6 @@ use Redirect;
 
 class Users extends Controller
 {
-  public function UserLogin(){
-    return view('user.auth.login');
-  }
-
-  public function login(){
-        // create our user data for the authentication
-        $userdata = array(
-            'email'     => Input::get('email'),
-            'password'  => Input::get('password')
-        );
-        // attempt to do the login
-        if (Auth::attempt($userdata)) {
-          // dd('sim');
-          // exit();
-            exit();
-            // Auth::login($userdata);
-            return redirect('user/home');
-          }
-            return Redirect::to('user/login');
-        }
 
     public function register(Request $request)
       {

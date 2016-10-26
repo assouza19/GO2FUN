@@ -17,17 +17,19 @@ Route::get('/', function () {
 
 //Rotas Gerais
 Route::get('/user', function(){
-  return view('usuario');
+    return view('usuario');
 });
 Route::get('/anunc', function(){
-  return view('anunc');
+    return view('anunc');
 });
 Route::get('/about', function(){
-return view('about');});
-Route::get('/contact', function(){
-  return view('contact');
+    return view('about');
 });
-// Rotas usuario
+Route::get('/contact', function(){
+    return view('contact');
+});
+
+/*// Rotas usuario
 Route::group(['middleware' => ['guest']], function () {
 Route::get('user/login', 'Users@UserLogin');
 Route::get('user/register', 'Users@UserRegister');
@@ -62,4 +64,21 @@ Route::group(['middleware' => ['auth']], function () {
   Route::post('anunciante/new/event', 'AnuncianteController@RegisterEvent');
   Route::get('anunciante/logout', 'AnuncianteController@logout');
   Route::get('anunciante/details/{idanunciante}/{idevento}', 'AnuncianteController@details');
+});*/
+
+
+// NOVAS ROTAS
+
+Route::group([
+    'prefix' => 'panel',
+    'middleware' => ['auth']
+], function() {
+    Route::get('', 'Dashboard@index');
+});
+
+Auth::routes();
+
+Route::get('logout', function() {
+    Auth::logout();
+    return redirect('login');
 });
