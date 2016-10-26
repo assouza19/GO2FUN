@@ -36,12 +36,13 @@ Route::post('user/register', 'Users@register');
 });
 
 Route::group(['middleware' => ['auth']], function () {
-  Route::get('user/home', 'Users@index');
-  Route::get('user/confirmed', 'Users@confirmed');
-  Route::get('user/details/{idevento}', 'Users@details');
-  Route::get('user/profile', 'Users@profile');
-  Route::get('user/logout', 'Users@logout');
-  Route::get('user/confirm/{id}&{idevento}&{idanunciante}', 'Users@confirmPresence');
+    Route::get('user/home', 'Users@index');
+    Route::get('user/home/filter/{type}', 'Eventos@filters'); // ROTA DOS FILTROS
+    Route::get('user/confirmed', 'Users@confirmed');
+    Route::get('user/details/{idevento}', 'Users@details');
+    Route::get('user/profile', 'Users@profile');
+    Route::get('user/logout', 'Users@logout');
+    Route::get('user/confirm/{id}&{idevento}&{idanunciante}', 'Users@confirmPresence');
 });
 
 // Rotas anunciante

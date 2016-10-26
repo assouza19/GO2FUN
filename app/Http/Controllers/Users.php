@@ -28,14 +28,12 @@ class Users extends Controller
         if (Auth::attempt($userdata)) {
           // dd('sim');
           // exit();
-            dd('sim');
             exit();
             // Auth::login($userdata);
             return redirect('user/home');
           }
             return Redirect::to('user/login');
         }
-    }
 
     public function register(Request $request)
       {
