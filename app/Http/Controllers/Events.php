@@ -85,9 +85,28 @@ class Events extends Controller
      * Usa-se com ajax
      * @param Requests $request
      */
-    public function confirm(Requests $request )
+    public function confirm(Requests $request)
     {
         $fields = $request->all();
+
+        $event = \App\Models\Events::find( $fields['event'] );
+        $user = \App\Models\User::find( $fields['id'] );
+
+        $event->confirmeds()->associate( $user );
+
+        if( $event->save() ) {
+            return response()
+                ->json([
+                    'success' => true,
+                    'message' => 'Você está confirmado'
+                ], 200);
+        } else {
+            return response()
+                ->json([
+                    'success' => false,
+                    'message' => 'Não foi possível confirmar'
+                ], 402);
+        }
     }
 
     /**
