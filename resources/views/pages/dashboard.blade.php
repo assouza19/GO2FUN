@@ -45,16 +45,19 @@
 				<div class="row line-row">
 					<div class="hr">&nbsp;</div>
 				</div>
-				<div v-repeat="events | filterBy search in ('name') | filterBy categories in ('categories') | orderBy sortKey reverse">
+				<div v-for="event in events
+					| filterBy search in ('name')
+					| filterBy categories in ('categories')
+					| orderBy sortBy reverse">
 					<div>
 						<div class="col-sm-6 col-md-4">
 							<div class="thumbnail">
-								<img v-if="foto" v-bind:src="foto" v-bind:id="id" alt="...">
-								<h2>@{{ name }} </h2>
-								<pre>@{{ description }}</pre>
+								<img v-if="event.foto" v-bind:src="event.foto" v-bind:id="event.id" alt="...">
+								<h2>@{{ event.name }} </h2>
+								<pre>@{{ event.description }}</pre>
 								<p>
-									<a v-bind:data-event="id" data-id="{{ Auth::user()->id }}" href="javascript:;" class="btn btn-primary js-confirm" role="button">Confirmar Presença</a>
-									<a v-bind:href="url" class="btn btn-default" role="button">Detalhes</a>
+									<a v-bind:data-event="event.id" data-id="{{ Auth::user()->id }}" href="javascript:;" class="btn btn-primary js-confirm" role="button">Confirmar Presença</a>
+									<a v-bind:href="event.url" class="btn btn-default" role="button">Detalhes</a>
 								</p>
 							</div>
 						</div>
@@ -80,15 +83,15 @@
 @endpush
 
 @push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.js"></script>
 <script>
 	var app = new Vue({
 		el: '#app',
 		data: {
 			categories: '',
-			sortKey: '',
+			sortKey: 'name',
 			search: '',
-			reverse: true,
+			reverse: false,
 			events: {!! json_encode($events) !!}
 		},
 		methods: {

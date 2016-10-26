@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Profile;
 use App\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/panel';
+    protected $redirectTo = '/panel/profile';
 
     /**
      * Create a new controller instance.
@@ -62,10 +63,51 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = bcrypt( $data['password'] );
+        $user->role = (isset($data['type']) ? $data['type'] : 'user');
+
+        if( $user->save() ) {
+            $fields = $this->fields();
+            if( $user->role == 'ad' ) {
+                unset( $fields['cpf'] );
+                unset( $fields['news'] );
+
+                array_push( $fields, $this->fieldsAd() );
+            }
+            $profile = new Profile();
+            $profile->fields = json_encode($fields);
+
+            return ($user->profile()->save( $profile ) ? true : false);
+        } else {
+            return false;
+        }
+    }
+
+    public function fields()
+    {
+        return [
+            'birth' => '',
+            'genre' => '',
+            'cpf' => '',
+            'phone' => '',
+            'address' => '',
+            'cep' => '',
+            'bairro' => '',
+            'city' => '',
+            'state' => '',
+            'news' => '',
+            'categories' => ''
+        ];
+    }
+
+    public function fieldsAd()
+    {
+        return [
+            'razao' => '',
+            'cnpj' => ''
+        ];
     }
 }
