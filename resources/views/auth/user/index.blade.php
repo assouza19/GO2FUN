@@ -27,21 +27,6 @@
                                 'class' => 'form-horizontal',
                                 'url' => url('register')
                             ]) }}
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Sou</label>
-                                <div class="col-lg-5">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="type" value="ad" required/> Anunciante
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="type" value="user" /> Usuário
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Nome completo</label>

@@ -15,6 +15,8 @@ class Dashboard extends Controller
         $categories = Category::all();
         $events = Events::all();
 
+//        dd( $events->toArray() );
+
         return view('pages.dashboard', [
             'categories' => $categories,
             'events' => $events

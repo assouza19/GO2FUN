@@ -48,7 +48,7 @@ class Events extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function confirmedsEvent($id )
+    public function confirmedsEvent( $id )
     {
         $event = \App\Models\Events::find( $id );
         return view('pages.events.confirmed', [
@@ -116,6 +116,43 @@ class Events extends Controller
     public function store(Requests $request )
     {
         $fields = $request->all();
+        if( $fields ) {
+            $event = new \App\Models\Events();
+            $event->user_id = $fields['author'];
+            $event->name = $fields['name'];
+            $event->categories = $this->setPreferences( $fields['categories'] );
+            $event->status = $fields['status'];
+            $event->value = $fields['value'];
+            $event->description = $fields['value'];
+            $event->address = $fields['address'];
+            $event->cep = $fields['cep'];
+            $event->bairro = $fields['bairro'];
+            $event->city = $fields['city'];
+            $event->state = $fields['state'];
+
+            $event->init_at = $fields['init_at'];
+            $event->ent_at = $fields['end_at'];
+
+            if( $event->save() ) {
+                session()->flash('success', 'Evento criado com sucesso!');
+                return redirect('panel/events/edit/' . $event->id);
+            } else {
+                session()->flash('error', 'Não foi possível criar esse evento.');
+                return redirect( 'panel/events/new' )
+                    ->withInput( $fields );
+            }
+        }
+    }
+
+    public function setPreferences( $array )
+    {
+        $string = ',.';
+        foreach( $array as $item )
+        {
+            $string += ",{$item}";
+        }
+
+        return str_replace(',.,', '', $string);
     }
 
     /**
@@ -126,6 +163,32 @@ class Events extends Controller
     public function update(Requests $request, $id )
     {
         $fields = $request->all();
+
+        if( $fields ) {
+            $event = \App\Models\Events::find( $id );
+            $event->name = $fields['name'];
+            $event->categories = $fields['categories'];
+            $event->status = $fields['status'];
+            $event->value = $fields['value'];
+            $event->description = $fields['value'];
+            $event->address = $fields['address'];
+            $event->cep = $fields['cep'];
+            $event->bairro = $fields['bairro'];
+            $event->city = $fields['city'];
+            $event->state = $fields['state'];
+
+            $event->init_at = $fields['init_at'];
+            $event->ent_at = $fields['end_at'];
+
+            if( $event->save() ) {
+                session()->flash('success', 'Evento salvado com sucesso!');
+                return redirect('panel/events/edit/' . $id);
+            } else {
+                session()->flash('error', 'Não foi possível salvar esse evento.');
+                return edirect('panel/events/edit/' . $id)
+                    ->withInput( $fields );
+            }
+        }
     }
 
     /**
