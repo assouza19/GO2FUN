@@ -54,84 +54,121 @@
 							</div>
 
 							<h3>Cadastre-se! É grátis.</h3>
-								{{ Form::open([
-									'class' => 'form-horizontal',
-									'id' => 'defaultForm',
-									'method' => 'POST',
-									'url' => url('register')
-								]) }}
-									{{ Form::hidden('type', 'ad') }}
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Nome da Empresa</label>
-										<div class="col-sm-5">
-											<input type="text" class="form-control" name="name" placeholder="Nome Fantasia" />
-										</div>
-														</div>
-														<div class="form-group">
-										<label class="col-sm-3 control-label">Razão Social</label>
-										<div class="col-sm-5">
-											<input type="text" class="form-control" name="razao" placeholder="Razão Social" />
-										</div>
-									</div>
+                            {{ Form::open([
+                                'class' => 'form-horizontal',
+                                'id' => 'defaultForm',
+                                'method' => 'POST',
+                                'url' => url('register'),
+                                'files' => true
+                            ]) }}
+                                {{ Form::hidden('type', 'ad') }}
 
-									<div class="form-group">
-										<label class="col-sm-3 control-label">CNPJ</label>
-										<div class="col-sm-5">
-											<input type="text" class="form-control" name="CNPJ" placeholder="CNPJ da empresa"/>
-										</div>
-									</div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Nome da Empresa</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" name="name" placeholder="Nome Fantasia" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Razão Social</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" name="fields[razao]" placeholder="Razão Social" />
+                                    </div>
+                                </div>
 
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Telefone</label>
-										<div class="col-sm-5">
-											<input type="text" class="form-control" name="telefone" placeholder="telefone"/>
-										</div>
-									</div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">CNPJ</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" name="fields[CNPJ]" placeholder="CNPJ da empresa"/>
+                                    </div>
+                                </div>
 
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Email</label>
-										<div class="col-sm-5">
-											<input type="text" class="form-control" name="email" placeholder="email"/>
-										</div>
-									</div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">CEP</label>
+                                    <div class="col-sm-5">
+                                        <input type="text"  id="cep" class="form-control"  maxlength="9" name="fields[cep]" placeholder="CEP"/>
+                                    </div>
+                                </div>
 
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Senha</label>
-										<div class="col-sm-5">
-											<input type="password" class="form-control" name="password" placeholder="senha"/>
-										</div>
-									</div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Rua</label>
+                                    <div class="col-sm-5">
+                                        <input name="fields[address]" type="text" class="form-control" size="65" id="rua"  disabled=""/>
+                                    </div>
+                                </div>
 
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Confirme sua senha</label>
-										<div class="col-sm-5">
-											<input type="password" class="form-control" name="confirmPassword" placeholder="confirme a senha" />
-										</div>
-									</div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Bairro</label>
+                                    <div class="col-sm-5">
+                                        <input name="fields[bairro]" type="text" class="form-control" size="65" id="bairro" disabled=""/>
+                                    </div>
+                                </div>
 
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Imagem de perfil:</label>
-										<div class="col-sm-5">
-											<input type="file" class="form-control" name="img" />
-										</div>
-									</div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Cidade</label>
+                                    <div class="col-sm-5">
+                                        <input type="text"  id="cidade" name="fields[city]" class="form-control" size="65" disabled=""/>
+                                    </div>
+                                </div>
 
-									<div class="form-group">
-										<div class="col-sm-6 col-sm-offset-3">
-											<div class="checkbox">
-												<label>
-													<input type="checkbox" name="agree" value="agree" /> Aceito os termos de uso.
-												</label>
-											</div>
-										</div>
-									</div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Estado</label>
+                                    <div class="col-sm-5">
+                                        <input type="text"  id="uf" class="form-control" size="65" name="fields[state]" disabled=""/>
+                                    </div>
+                                </div>
 
-									<div class="form-group">
-										<div class="col-sm-9 col-sm-offset-3">
-											<button type="submit" class="btn btn-primary" name="signup" value="Sign up">CADASTRAR</button>
-										</div>
-									</div>
-								{{ Form::close() }}
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Telefone</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" name="fields[telefone]" placeholder="telefone"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Email</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" name="email" placeholder="email"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Senha</label>
+                                    <div class="col-sm-5">
+                                        <input type="password" class="form-control" name="password" placeholder="senha"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Confirme sua senha</label>
+                                    <div class="col-sm-5">
+                                        <input type="password" class="form-control" name="confirmPassword" placeholder="confirme a senha" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Imagem de perfil:</label>
+                                    <div class="col-sm-5">
+                                        <input type="file" class="form-control" name="img" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="agree" value="agree" /> Aceito os termos de uso.
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <button type="submit" class="btn btn-primary" name="signup" value="Sign up">CADASTRAR</button>
+                                    </div>
+                                </div>
+                            {{ Form::close() }}
 							</div>
 						</div>
 					</div>

@@ -15,18 +15,28 @@ Route::get('/', function () {
     return view('inicio');
 });
 
+Route::get('images/{folder}/{image}', function($folder, $image) {
+    $file = \Storage::drive('uploads')->get( $folder . DIRECTORY_SEPARATOR . $image );
+    $response = \Response::make( $file );
+    $contentType = \Storage::drive('uploads')->mimeType($folder . DIRECTORY_SEPARATOR . $image);
+    $response->header('Content-Type', $contentType);
+    return $response;
+});
+
 //Rotas Gerais
 Route::get('/user', function(){
     return view('usuario');
 });
-Route::get('/anunc', function(){
-    return view('anunc');
-});
+Route::get('/anunc', 'Auth\RegisterController@getRegisterAd');
 Route::get('/about', function(){
     return view('about');
 });
 Route::get('/contact', function(){
     return view('contact');
+});
+
+Route::get('teste', function() {
+   dd( storage_path('app/uploads/teste') );
 });
 
 /*// Rotas usuario

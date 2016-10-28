@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\Profile;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -71,8 +72,11 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+
+    public function register(Request $request)
     {
+        $data = $request->all();
+
         $user = new User();
         $user->name = $data['name'];
         $user->email = $data['email'];
@@ -80,19 +84,30 @@ class RegisterController extends Controller
         $user->role = (isset($data['type']) ? $data['type'] : 'user');
 
         if( $user->save() ) {
-            $fields = $this->fields();
-            if( $user->role == 'ad' ) {
-                unset( $fields['cpf'] );
-                unset( $fields['news'] );
-
-                array_push( $fields, $this->fieldsAd() );
+            if( $request->hasFile( 'img' ) ) {
+                $user->avatar()->create( \App\Helpers\Files::get( $request->file('img') ) );
             }
             $profile = new Profile();
-            $profile->fields = json_encode($fields);
+            $profile->fields = json_encode( $data['fields'] );
 
-            return ($user->profile()->save( $profile ) ? true : false);
+            if( $user->profile()->save( $profile ) ) {
+                if( \Auth::attempt([
+                    'email' => $data['email'],
+                    'password' => $data['password']
+                ] ) ) {
+                    session()->flash('success', 'Bem vindo!');
+                    return redirect('panel');
+                } else {
+                    session()->flash('error', 'Não foi possível fazer o login.');
+                    return redirect('login');
+                }
+            } else {
+                session()->flash('error', 'Não foi possível criar o perfil.');
+                return redirect('login');
+            }
         } else {
-            return false;
+            session()->flash('error', 'Não foi possível se registrar.');
+            return redirect('login');
         }
     }
 

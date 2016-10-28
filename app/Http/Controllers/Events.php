@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Request as Ajax;
 
 class Events extends Controller
 {
@@ -14,7 +15,12 @@ class Events extends Controller
      */
     public function index()
     {
-        return view('pages.events.index');
+        $events = \App\Models\Events::where('user_id', \Auth::user()->id)->get();
+
+//        dd( $events->toArray() );
+        return view('pages.events.index', [
+            'events' => $events
+        ]);
     }
 
     /**
@@ -61,11 +67,18 @@ class Events extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id )
+    public function edit( $id )
     {
         $event = \App\Models\Events::find( $id );
+        $categories = \App\Models\Category::all();
+
+
+//        dd( $event->toArray() );
+
+
         return view('pages.events.update', [
-            'event' => $event
+            'event' => $event,
+            'categories' => $categories
         ]);
     }
 
@@ -83,9 +96,9 @@ class Events extends Controller
      * Confirma usuário no evento
      * Rota em: routes/api.php
      * Usa-se com ajax
-     * @param Requests $request
+     * @param Request $request
      */
-    public function confirm(Requests $request)
+    public function confirm(Request $request)
     {
         $fields = $request->all();
 
@@ -111,19 +124,19 @@ class Events extends Controller
 
     /**
      * Salva o evento (cria)
-     * @param Requests $request
+     * @param Request $request
      */
-    public function store(Requests $request )
+    public function store(Request $request )
     {
         $fields = $request->all();
         if( $fields ) {
             $event = new \App\Models\Events();
             $event->user_id = $fields['author'];
             $event->name = $fields['name'];
-            $event->categories = $this->setPreferences( $fields['categories'] );
-            $event->status = $fields['status'];
+            $event->categories = json_encode( $fields['categories'] );
+//            $event->status = $fields['status'];
             $event->value = $fields['value'];
-            $event->description = $fields['value'];
+            $event->description = $fields['description'];
             $event->address = $fields['address'];
             $event->cep = $fields['cep'];
             $event->bairro = $fields['bairro'];
@@ -131,11 +144,18 @@ class Events extends Controller
             $event->state = $fields['state'];
 
             $event->init_at = $fields['init_at'];
-            $event->ent_at = $fields['end_at'];
+            $event->end_at = $fields['end_at'];
+
+            $event->classification = $fields['classification'];
+            $event->period =  $fields['period'];
+
+            if( !isset( $event->image_url ) && isset( $fields['img'] ) ) {
+                $event->image()->create( \App\Helpers\Files::get( $request->file('img') ) );
+            }
 
             if( $event->save() ) {
                 session()->flash('success', 'Evento criado com sucesso!');
-                return redirect('panel/events/edit/' . $event->id);
+                return redirect('panel/events/update/' . $event->id);
             } else {
                 session()->flash('error', 'Não foi possível criar esse evento.');
                 return redirect( 'panel/events/new' )
@@ -144,31 +164,20 @@ class Events extends Controller
         }
     }
 
-    public function setPreferences( $array )
-    {
-        $string = ',.';
-        foreach( $array as $item )
-        {
-            $string += ",{$item}";
-        }
-
-        return str_replace(',.,', '', $string);
-    }
-
     /**
      * Atualiza o evento
-     * @param Requests $request
+     * @param Request $request
      * @param $id
      */
-    public function update(Requests $request, $id )
+    public function update(Request $request, $id )
     {
         $fields = $request->all();
 
         if( $fields ) {
             $event = \App\Models\Events::find( $id );
             $event->name = $fields['name'];
-            $event->categories = $fields['categories'];
-            $event->status = $fields['status'];
+            $event->categories = json_encode($fields['categories']);
+//            $event->status = $fields['status'];
             $event->value = $fields['value'];
             $event->description = $fields['value'];
             $event->address = $fields['address'];
@@ -178,14 +187,21 @@ class Events extends Controller
             $event->state = $fields['state'];
 
             $event->init_at = $fields['init_at'];
-            $event->ent_at = $fields['end_at'];
+            $event->end_at = $fields['end_at'];
+
+            $event->classification = $fields['classification'];
+            $event->period =  $fields['period'];
+
+            if( !isset( $event->image_url ) && isset( $fields['img'] ) ) {
+                $event->image()->create( \App\Helpers\Files::get( $request->file('img') ) );
+            }
 
             if( $event->save() ) {
                 session()->flash('success', 'Evento salvado com sucesso!');
-                return redirect('panel/events/edit/' . $id);
+                return redirect('panel/events/update/' . $id);
             } else {
                 session()->flash('error', 'Não foi possível salvar esse evento.');
-                return edirect('panel/events/edit/' . $id)
+                return redirect('panel/events/update/' . $id)
                     ->withInput( $fields );
             }
         }

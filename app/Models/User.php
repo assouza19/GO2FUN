@@ -38,4 +38,16 @@ class User extends Authenticatable
     {
         return $this->morphMany( Files::class, 'attach' );
     }
+
+    public function getAvatarUrlAttribute()
+    {
+        if( isset( $this->avatar[0] ) ) {
+            return [
+                'full' => $this->avatar[0]->url,
+                'thumbnail' => $this->avatar[0]->thumbnail
+            ];
+        } else {
+            return null;
+        }
+    }
 }

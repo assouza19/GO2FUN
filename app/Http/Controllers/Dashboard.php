@@ -15,7 +15,7 @@ class Dashboard extends Controller
         $categories = Category::all();
         $events = Events::all();
 
-//        dd( $events->toArray() );
+//        dd( \Auth::user()->avatar[0]->thumbnail );
 
         return view('pages.dashboard', [
             'categories' => $categories,

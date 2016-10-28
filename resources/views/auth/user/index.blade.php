@@ -25,7 +25,8 @@
                                 'id' => 'defaultForm',
                                 'method' => 'POST',
                                 'class' => 'form-horizontal',
-                                'url' => url('register')
+                                'url' => url('register'),
+                                'files' => true
                             ]) }}
 
                                 <div class="form-group">
