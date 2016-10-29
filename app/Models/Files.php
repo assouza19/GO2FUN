@@ -10,7 +10,7 @@ class Files extends Model
 
     protected $fillable = [ 'file_name', 'file_disk', 'file_path', 'file_ext' ];
 
-    protected $appends = [ 'url', 'thumbnail' ];
+    protected $appends = [ 'url', 'thumbnail', 'medium' ];
 
     /**
      * Get all of the owning likeable models.
@@ -28,6 +28,12 @@ class Files extends Model
     public function getThumbnailAttribute()
     {
         $image = str_replace( ".{$this->attributes['file_ext']}", "-thumbnail.{$this->attributes['file_ext']}", $this->attributes['file_path'] );
+        return url('images') . str_replace(['\\', 'app/uploads'], ['/', ''], $image);
+    }
+
+    public function getMediumAttribute()
+    {
+        $image = str_replace( ".{$this->attributes['file_ext']}", "-medium.{$this->attributes['file_ext']}", $this->attributes['file_path'] );
         return url('images') . str_replace(['\\', 'app/uploads'], ['/', ''], $image);
     }
 }

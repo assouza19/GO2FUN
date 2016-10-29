@@ -5,21 +5,23 @@
         <table id="dataTable" class="table table-bordered table-striped table-hover table-linked">
             <thead>
             <tr>
-                <th class="hidden-sm hidden-xs">ID</th>
-                <th class="hidden-sm hidden-xs">Nome</th>
-                <th class="hidden-sm hidden-xs">Valor</th>
-                <th class="hidden-sm hidden-xs">Status</th>
-                <th class="hidden-sm hidden-xs">Início/Fim</th>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th>Início/Fim</th>
+                <th>Confirmados</th>
             </tr>
             </thead>
             <tbody>
             @foreach($events as $event)
                 <tr data-href="{{ $event->edit }}">
-                    <td class="linked hidden-sm hidden-xs">{{ $event->id }}</td>
-                    <td class="linked hidden-sm hidden-xs">{{ $event->name }}</td>
-                    <td class="linked hidden-sm hidden-xs">R$ {{ $event->value }}</td>
-                    <td class="linked hidden-sm hidden-xs">{{ $event->status }}</td>
-                    <td class="linked hidden-sm hidden-xs">{{ $event->init }} - {{ $event->end }}</td>
+                    <td class="linked">{{ $event->id }}</td>
+                    <td class="linked">{{ $event->name }}</td>
+                    <td class="linked">R$ {{ $event->value }}</td>
+                    <td class="linked">{{ $event->status }}</td>
+                    <td class="linked">{{ $event->init }} - {{ $event->end }}</td>
+                    <td>{{ $event->total_confirmeds }}</td>
                 </tr>
             @endforeach
             </tbody>

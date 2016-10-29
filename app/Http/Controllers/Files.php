@@ -13,17 +13,20 @@ class Files extends Controller
         if( Ajax::ajax() && $request->all() )
         {
             $file = \App\Models\Files::find( $request->input('id') );
-            if( $file->delete() ) {
+
+            $remove = \App\Helpers\Files::deleteFiles( $file );
+
+            if( $remove && $file->delete() ) {
                 return response()
                     ->json([
                         'success' => true,
-                        'message' => 'Imagem deletada com sucesso'
+                        'message' => 'Imagem deletada com sucesso',
                     ], 200);
             } else {
                 return response()
                     ->json([
                         'success' => false,
-                        'message' => 'Não foi possível deletar a imagem'
+                        'message' => 'Não foi possível deletar a imagem',
                     ], 402);
             }
         }

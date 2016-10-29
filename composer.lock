@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "62599a57ee5109cd49d45a3276211798",
-    "content-hash": "d83772a2a7e0c40eabe0d1060274c41f",
+    "hash": "6308ffd9c2443917a9ef1031bbb9ede1",
+    "content-hash": "3f49019ac9a1cb4d31099a24cf0f5b8c",
     "packages": [
         {
             "name": "barryvdh/laravel-cors",
@@ -213,6 +213,69 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "flyingluscas/bug-notifier",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flyingluscas/Laravel-BugNotifier.git",
+                "reference": "67054f665df7170fa4cd63097104d127d55dffac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flyingluscas/Laravel-BugNotifier/zipball/67054f665df7170fa4cd63097104d127d55dffac",
+                "reference": "67054f665df7170fa4cd63097104d127d55dffac",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.1",
+                "php": "~5.6|~7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "orchestra/testbench": "~3.1",
+                "phpunit/phpunit": "~4.0||~5.0",
+                "scrutinizer/ocular": "~1.1",
+                "squizlabs/php_codesniffer": "~2.3",
+                "tightenco/mailthief": "0.3.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FlyingLuscas\\BugNotifier\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lucas Pires",
+                    "email": "lucas.pires.mattos@gmail.com",
+                    "homepage": "https://github.com/flyingluscas",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Get notified every time an exception is thrown in your application.",
+            "homepage": "https://github.com/flyingluscas/Laravel-BugNotifier",
+            "keywords": [
+                "BugNotifier",
+                "bitbucket",
+                "bug",
+                "e-mail",
+                "flyingluscas",
+                "github",
+                "issues",
+                "laravel"
+            ],
+            "time": "2016-10-21 04:11:05"
         },
         {
             "name": "guzzlehttp/psr7",

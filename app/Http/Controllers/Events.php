@@ -88,7 +88,10 @@ class Events extends Controller
      */
     public function create()
     {
-        return view('pages.events.create');
+        $categories = \App\Models\Category::all();
+        return view('pages.events.create', [
+            'categories' => $categories
+        ]);
     }
 
 
@@ -102,12 +105,12 @@ class Events extends Controller
     {
         $fields = $request->all();
 
-        $event = \App\Models\Events::find( $fields['event'] );
-        $user = \App\Models\User::find( $fields['id'] );
+        $db = \DB::table('events_confirmeds')->insert([
+            'user_id' => $fields['user'],
+            'event_id' => $fields['event']
+        ]);
 
-        $event->confirmeds()->associate( $user );
-
-        if( $event->save() ) {
+        if( $db ) {
             return response()
                 ->json([
                     'success' => true,

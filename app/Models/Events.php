@@ -22,7 +22,18 @@ class Events extends Model
         'state'
     ];
 
-    protected $appends = [ 'url', 'distance', 'init', 'end', 'edit', 'image_url' ];
+    protected $appends = [
+        'url',
+        'distance',
+        'init',
+        'end',
+        'edit',
+        'image_url',
+        'foto',
+        'is_confirmed',
+        'total_confirmeds',
+        'price'
+    ];
 
     protected $dates = [ 'init_at', 'end_at' ];
 
@@ -31,17 +42,36 @@ class Events extends Model
         return $this->morphMany( Files::class, 'attach' );
     }
 
+    public function getIsConfirmedAttribute()
+    {
+        return \App\Helpers\Events::userConfirmed( $this->attributes['id'] );
+    }
+
+    public function getTotalConfirmedsAttribute()
+    {
+        return \DB::table('events_confirmeds')
+            ->where('event_id', $this->attributes['id'])
+            ->get()
+            ->count();
+    }
+
     public function getImageUrlAttribute()
     {
         if( isset( $this->image[0] ) ) {
             return [
                 'full' => $this->image[0]->url,
                 'thumbnail' => $this->image[0]->thumbnail,
+                'medium' => $this->image[0]->medium,
                 'id' => $this->image[0]->id
             ];
         } else {
             return null;
         }
+    }
+
+    public function getFotoAttribute()
+    {
+        return (isset($this->image[0]) ? $this->image[0]->medium : null);
     }
 
     public function getInitAttribute()
@@ -77,11 +107,6 @@ class Events extends Model
         return \App\Helpers\Helpers::real( $this->attributes['value'] );
     }
 
-    public function confirmeds()
-    {
-        return $this->belongsTo( User::class, 'event_id', 'user_id', 'events_confirmeds' );
-    }
-
     public function getUrlAttribute()
     {
         return url('panel/events/details/' . $this->attributes['id']);
@@ -96,7 +121,19 @@ class Events extends Model
         $str = file_get_contents("http://maps.googleapis.com/maps/api/distancematrix/xml?origins={$origins}|&destinations={$destinations}|&mode={$mode}|&language={$language}|&sensor=false");
         $distance = new SimpleXMLElement( $str );
         return (isset($distance->status) ? (string) $distance->row->element->distance->text : null);
+    }
 
-//        return $distance;
+    public function scopePreferences( $query )
+    {
+        $preferences = \Auth::user()->categories;
+        $total = (count( $preferences ) - 1);
+        $rand = $preferences[ rand(0, $total) ];
+
+        return $query->where('categories', 'LIKE', '%"' . $rand . '"%');
+    }
+
+    public function getPriceAttribute()
+    {
+        return (int) str_replace([',','.'], '', $this->attributes['value']);
     }
 }

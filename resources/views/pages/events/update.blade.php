@@ -116,7 +116,7 @@
                         </div>
 
                         <div class="form-group">
-                            {{ Form::label('period', 'Período ' . $event->period, [ 'class' => 'col-sm-3 control-label' ]) }}
+                            {{ Form::label('period', 'Período', [ 'class' => 'col-sm-3 control-label' ]) }}
                             <div class="col-sm-6">
                                 <select name="period" id="period" class="form-control" data-style="btn-primary">
                                     @foreach( \App\Helpers\Events::getPeriod() as $index => $item )

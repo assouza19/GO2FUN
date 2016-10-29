@@ -1,7 +1,7 @@
 <div class="col-lg-2 col-md-3 col-sm-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="{{ url('/')}}" class="site_title"><i class="fa fa-location-arrow"></i> <span>GO2FUN</span></a>
+            <a href="{{ url('panel') }}" class="site_title"><i class="fa fa-location-arrow"></i> <span>GO2FUN</span></a>
         </div>
         <div class="clearfix"></div>
 
@@ -23,15 +23,14 @@
                 <h3>Geral</h3>
                 <ul class="nav side-menu">
                     <li><a href="{{ url('panel') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    @if( \Auth::user()->role != 'user' )
                     <li><a><i class="fa fa-home"></i> Eventos <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
-                            @if( \Auth::user()->role != 'user' )
                                 <li><a href="{{ url('panel/events/new') }}">Criar evento</a></li>
                                 <li><a href="{{ url('panel/events') }}">Meus eventos</a></li>
-                            @endif
-                            <li><a href="{{ url('panel/confirmed') }}">Confirmados</a></li>
                         </ul>
                     </li>
+                    @endif
                     <li><a href="{{ url('panel/profile') }}"><i class="fa fa-edit"></i> Meu Perfil</a></li>
                     <li><a href="{{ url('logout') }}"><i class="fa fa-sign-out pull-right"></i>Sair</a>
                 </ul>

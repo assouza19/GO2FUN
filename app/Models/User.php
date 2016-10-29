@@ -20,6 +20,10 @@ class User extends Authenticatable
         'name', 'role'
     ];
 
+    protected $appends = [
+        'is_confirmed'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -39,6 +43,23 @@ class User extends Authenticatable
         return $this->morphMany( Files::class, 'attach' );
     }
 
+    public function confirmeds()
+    {
+        return $this->belongsToMany( Events::class, 'events_confirmeds', 'user_id', 'event_id' );
+    }
+
+    public function getIsConfirmedAttribute()
+    {
+        $events = $this->confirmeds;
+
+        foreach( $events as $event )
+        {
+            $items[] = $event->id;
+        }
+
+        return (isset($items) ? $items : null);
+    }
+
     public function getAvatarUrlAttribute()
     {
         if( isset( $this->avatar[0] ) ) {
@@ -46,6 +67,15 @@ class User extends Authenticatable
                 'full' => $this->avatar[0]->url,
                 'thumbnail' => $this->avatar[0]->thumbnail
             ];
+        } else {
+            return null;
+        }
+    }
+
+    public function getCategoriesAttribute()
+    {
+        if( isset($this->profile->fields) ) {
+            return (isset($this->profile->fields->categories) ? $this->profile->fields->categories : null);
         } else {
             return null;
         }

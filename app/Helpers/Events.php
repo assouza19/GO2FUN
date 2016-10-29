@@ -32,4 +32,10 @@ class Events
         ];
         return (isset($get) ? $array[$get] : $array);
     }
+
+    static public function userConfirmed( $event )
+    {
+        $user = \Auth::user()->is_confirmed;
+        return (in_array($event, $user) ? true : false);
+    }
 }

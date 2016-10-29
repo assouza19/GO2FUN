@@ -20,8 +20,12 @@ class Users extends Controller
      */
     public function profile()
     {
+        $categories = \App\Models\Category::all();
+
+//        dd( \Auth::user()->profile->fields );
         return view( 'pages.users.index', [
-            'user' => \Auth::user()
+            'user' => \Auth::user(),
+            'categories' => $categories
         ] );
     }
 
@@ -32,17 +36,28 @@ class Users extends Controller
     public function update( Request $request )
     {
         $fields = $request->all();
-        $user = \Auth::user();
+        $user = \App\Models\User::find(\Auth::user()->id);
 
         if( $fields ) {
-            $new = json_encode( $fields['fields'] );
-            $user->profile()->fields = $new;
+            $user->name = $fields['name'];
+            $user->email = $fields['email'];
+            $user->password = bcrypt( $fields['password'] );
+
+            $newFields = $fields['fields'];
+
+
+            if( isset($fields['categories']) && count( $fields['categories'] ) > 0 ) {
+                $newFields['categories'] = $fields['categories'];
+            }
+
+            $new = json_encode( $newFields );
+
+
+            $user->profile->fields = $new;
 
             // se tiver um arquivo ele insere
-            if( $request->has('image') ) {
-                $avatar = new \App\Models\Files();
-                $avatar->image = $request->file('image');
-                $user->avatar()->attach( $avatar );
+            if( !isset( $user->avatar_url ) && isset( $fields['img'] ) ) {
+                $user->avatar()->create( \App\Helpers\Files::get( $request->file('img') ) );
             }
 
             try {

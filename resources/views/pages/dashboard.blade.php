@@ -8,26 +8,42 @@
 				<label for="search" class="control-label pull-left">Pesquisar</label>
 				<input type="text" ng-model="searchBy" class="form-control pull-left"  style="width: auto; margin: 0 10px;" placeholder="Digite o nome...">
 
-				<select ng-model="categories" class="selectpicker" data-style="btn-primary" style="float: left;">
-					<option value="">Categoria</option>
-					@foreach( $categories as $category )
-						<option value="{{ $category['name'] }}">{{ $category['name'] }}</option>
-					@endforeach
-				</select>
+				<div class="form-group pull-left" style="margin-right: 10px;">
+                    <select ng-model="categories" class="form-control" style="float: left; width: auto;">
+                        <option value="">Categoria</option>
+                        @foreach( $categories as $category )
+                            <option value="{{ $category['name'] }}">{{ $category['name'] }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-				<select ng-model="value" class="selectpicker" data-style="btn-primary" style="float: left;">
-					<option value="">Ordernação</option>
-					<option value="value">Menor preço</option>
-					<option value="-value">Maior preço</option>
-					<option value="-name">Nome (z-a)</option>
-					<option value="name">Nome (a-z)</option>
-					<option value="init_at">Início (a-z)</option>
-					<option value="-init_at">Início (z-a)</option>
-					<option value="end_at">Fim (a-z)</option>
-					<option value="-end_at">Fim (z-a)</option>
-					<option value="+distance">Perto</option>
-					<option value="-distance">Longe</option>
-				</select>
+				<div class="form-group pull-left" style="margin-right: 10px;">
+                    <select ng-model="value" class="form-control" style="float: left; width: auto;">
+                        <option value="">Ordernação</option>
+                        <option value="value">Menor preço</option>
+                        <option value="-value">Maior preço</option>
+                        <option value="-name">Nome (z-a)</option>
+                        <option value="name">Nome (a-z)</option>
+                        <option value="init_at">Início (a-z)</option>
+                        <option value="-init_at">Início (z-a)</option>
+                        <option value="end_at">Fim (a-z)</option>
+                        <option value="-end_at">Fim (z-a)</option>
+                        <option value="+distance">Perto</option>
+                        <option value="-distance">Longe</option>
+                    </select>
+                </div>
+
+                <div class="form-group pull-left">
+                    <select ng-model="maxVal" class="form-control" style="width: auto;">
+                        <option value="" selected>Faixa de preço</option>
+                        <option value="1000">Até R$ 10,00</option>
+                        <option value="2000">Até R$ 20,00</option>
+                        <option value="3000">Até R$ 30,00</option>
+                        <option value="4000">Até R$ 40,00</option>
+                        <option value="5000">Até R$ 50,00</option>
+                        <option value="50>">Maior que R$ 50,00</option>
+                    </select>
+                </div>
 
 				<button type="button" class="btn btn-success pull-right" onclick="Mudarestado('minhaDiv')">Mostrar/Ocultar Preferidos</button>
 			</div>
@@ -37,14 +53,27 @@
 					<div class="hr">&nbsp;</div>
 				</div>
 				<div class="row">
-					<?php foreach ($events as $event): ?>
+					<?php foreach ($preferences as $event): ?>
 						<div class="col-sm-6 col-md-4">
-							<div class="thumbnail">
-								{{--<img src="{!! $event->foto !!}" id="{!!$event->idevento!!}" alt="...">--}}
-								{{--<h2>{!! $event->nome !!}</h2>--}}
-								{{--<pre>{!! $event->descricaoCategoria !!}</pre>--}}
-								{{--<p>--}}
-									{{--<a href="{{url('user/confirm')}}/{{ Auth::user()->id }}&{!!$event->idevento!!}&{!!$event->idanunciante!!}" class="btn btn-primary" role="button">Confirmar Presença</a> <a href="{{url('user/details/')}}/{!!$event->idevento!!}" class="btn btn-default" role="button">Detalhes</a></p>--}}
+							<div class="event-item">
+								<div class="thumbnail">
+									<img src="{{ $event->foto }}" class="img-responsive" alt="">
+								</div>
+								<div class="event-item-content">
+									<h3 class="event-item-name">{{ $event->name  }}</h3>
+									<div class="event-item-hover">
+										<p>{{ $event->description  }}</p>
+										<p>R$ {{ $event->value  }} - Início: {{ $event->init  }}</p>
+										<div class="event-item-hover-footer">
+                                            @if( $event->is_confirmed )
+                                                <span class="btn btn-success">Você está confirmado</span>
+                                            @else
+                                                <a data-event="{{ $event->id  }}" data-id="{{ Auth::user()->id }}" href="javascript:;" class="btn btn-success js-confirm" role="button">Confirmar Presença</a>
+                                            @endif
+											<a href="{{ $event->url  }}" class="btn btn-primary" role="button">Detalhes</a>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					<?php endforeach; ?>
@@ -54,16 +83,32 @@
 			</div>
 			<div>
 				<div>
-					<div class="col-sm-6 col-md-4" data-ng-repeat="event in events | filter: searchBy | filter: categories | orderBy: value">
-						<div class="thumbnail">
-							{{--<img v-if="foto" v-bind:src="event.foto" v-bind:id="event.id" alt="...">--}}
-							<h2>[[ event.name ]]</h2>
-							<pre>[[ event.description ]]</pre>
-							<p>[[ event.value ]] - [[ event.distance ]]</p>
-							<p>
-								<a data-event="[[ event.id ]]" data-id="{{ Auth::user()->id }}" href="javascript:;" class="btn btn-primary js-confirm" role="button">Confirmar Presença</a>
-								<a href="[[ event.url ]]" class="btn btn-default" role="button">Detalhes</a>
-							</p>
+					<div class="col-sm-6 col-md-4"
+                         data-ng-repeat="event in events
+                         | filter: searchBy
+                         | filter: categories
+                         | priceRange: maxVal
+                         | orderBy: value">
+						<div class="event-item">
+							<div class="thumbnail" ng-if="event.foto">
+								<img src="[[ event.foto ]]" class="img-responsive" alt="">
+							</div>
+							<div class="event-item-content">
+								<h3 class="event-item-name">[[ event.name ]]</h3>
+								<div class="event-item-hover">
+									<p>[[ event.description ]]</p>
+									<p>R$ [[ event.value ]] - Início: [[ event.init ]]</p>
+									<div class="event-item-hover-footer">
+                                        <div ng-if="event.is_confirmed" class="pull-left">
+                                            <span class="btn btn-success">Você está confirmado</span>
+                                        </div>
+                                        <div ng-class="{'hidden': event.is_confirmed}" class="pull-left">
+                                            <a href="javascript:;" ng-click="confirm( event.id ,{{ Auth::user()->id }})" class="btn btn-success js-confirm" role="button">Confirmar Presença</a>
+                                        </div>
+                                        <a href="[[ event.url ]]" class="btn btn-primary" role="button">Detalhes</a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -84,6 +129,18 @@
 	.app .bootstrap-select .filter-option {
 		color: #ffffff;
 	}
+
+	.event-item {
+		width: 100%;
+		float: left;
+		position: relative;
+		margin-bottom: 15px;
+	}
+
+	.event-item-hover p {
+		margin-bottom: 15px;
+	}
+
 </style>
 @endpush
 
@@ -95,7 +152,28 @@
 		$interpolateProvider.startSymbol('[[');
 		$interpolateProvider.endSymbol(']]');
 	});
-	app.controller('ListController', ['$scope', function( $scope ) {
+
+    app.filter('priceRange', function () {
+        return function ( events, value ) {
+            var filteredItems = [];
+            angular.forEach(events, function ( event ) {
+                if( value == null ) {
+                    filteredItems.push(event);
+                } else if ( value == '50>' ) {
+                    if ( event.price > 0 ) {
+                        filteredItems.push(event);
+                    }
+                } else {
+                    if ( event.price <= value ) {
+                        filteredItems.push(event);
+                    }
+                }
+            });
+            return filteredItems;
+        }
+    });
+
+	app.controller('ListController', ['$scope', '$http', function( $scope, $http ) {
 		$scope.events = {!! json_encode($events) !!};
 
 		$scope.order = 'name';
@@ -104,20 +182,35 @@
 			$scope.order = order;
 		};
 
-	}]);
+		$scope.confirm = function( event, user )
+		{
+			$http({
+				method: 'POST',
+				url: '{{ url('api/events/confirm') }}',
+				data: {
+					event: event,
+					user: user
+				}
+			}).then(function successCallback(response) {
+				console.log(response);
+			}, function errorCallback(response) {
+				console.log(response);
+			})
+		}
 
+	}]);
 
 	(function($) {
 		$('.js-confirm').click(function() {
 			var el = $(this),
-				id = "{{ \Auth::user()->id }}",
-				event = $(this).data('event');
+					user = "{{ \Auth::user()->id }}",
+					event = $(this).data('event');
 
 			$.ajax({
 				url: '{{ url('api/events/confirm') }}',
 				method: 'POST',
 				data: {
-					id: id,
+					user: user,
 					event: event
 				},
 				success: function() {

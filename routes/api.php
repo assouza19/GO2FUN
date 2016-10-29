@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::group([
     'prefix' => 'events',
-    'middleware' => ['auth:api']
+    'middleware' => ['cors']
 ], function() {
     Route::post('confirm', 'Events@confirm');
 });

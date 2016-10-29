@@ -14,12 +14,14 @@ class Dashboard extends Controller
     {
         $categories = Category::all();
         $events = Events::all();
+        $preferences = Events::preferences()->get();
 
-//        dd( \Auth::user()->avatar[0]->thumbnail );
+//        dd( \App\Helpers\Events::userConfirmed(1) );
 
         return view('pages.dashboard', [
             'categories' => $categories,
-            'events' => $events
+            'events' => $events,
+            'preferences' => $preferences
         ]);
     }
 }

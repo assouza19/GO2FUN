@@ -24,4 +24,37 @@ class Helpers
         $xNewValue    = ($xDecimal > 0) ? $xNewValue.".".substr($xValue, strlen($xNewValue), strlen($xValue)) : $xValue;
         return (isset($xValue) && $xValue != '' ? number_format($xNewValue, $xDecimal, ',', '.') : null);
     }
+
+    static public function getFields( $get = null )
+    {
+        if( \Auth::user()->role != 'ad' ) {
+            $fields = [
+                'birth' => 'Data de nascimento',
+                'genre' => 'Genêro',
+                'cpf' => 'CPF',
+                'phone' => 'Telefone',
+                'cep' => 'Cep',
+                'address' => 'Endereço',
+                'bairro' => 'Bairro',
+                'city' => 'Cidade',
+                'state' => 'Estado',
+                'news' => 'News',
+                'categories' => 'Categorias'
+            ];
+        } else {
+            $fields  = [
+                'razao' => '',
+                'CNPJ' => '',
+                'phone' => 'Telefone',
+                'cep' => 'Cep',
+                'address' => 'Endereço',
+                'bairro' => 'Bairro',
+                'city' => 'Cidade',
+                'state' => 'Estado',
+                'categories' => 'Categorias'
+            ];
+        }
+
+        return (isset($get) ? $fields[ $get ] : $fields);
+    }
 }
