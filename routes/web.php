@@ -39,6 +39,10 @@ Route::get('teste', function() {
    dd( storage_path('app/uploads/teste') );
 });
 
+Route::get('test', function() {
+    dd( bcrypt('12345678') );
+});
+
 
 /*
 |--------------------------------------------------------------------------

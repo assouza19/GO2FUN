@@ -17,9 +17,8 @@ class Events extends Controller
     {
         $events = \App\Models\Events::where('user_id', \Auth::user()->id)->get();
 
-//        dd( $events->toArray() );
         return view('pages.events.index', [
-            'events' => $events
+            'events' => isset($events) ? $events : '[]'
         ]);
     }
 
@@ -35,6 +34,33 @@ class Events extends Controller
         return view('pages.events.details', [
             'event' => $event
         ]);
+    }
+
+    public function setNote( Request $request )
+    {
+        $fields = $request->all();
+        if( $fields ) {
+            $db = \DB::table('events_evaluate')
+                ->insert([
+                    'event_id' => $fields['event'],
+                    'user_id' => $fields['user'],
+                    'star' => $fields['star']
+                ]);
+
+            if( $db ) {
+                return response()
+                    ->json([
+                        'success' => true,
+                        'message' => 'Sua avaliação foi salva.'
+                    ], 200);
+            } else {
+                return response()
+                    ->json([
+                        'success' => false,
+                        'message' => 'Não foi possível fazer a avaliação.'
+                    ], 402);
+            }
+        }
     }
 
     /**

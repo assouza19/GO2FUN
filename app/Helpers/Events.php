@@ -38,4 +38,5 @@ class Events
         $user = \Auth::user()->is_confirmed;
         return (in_array($event, $user) ? true : false);
     }
+
 }

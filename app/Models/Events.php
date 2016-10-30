@@ -77,13 +77,13 @@ class Events extends Model
     public function getInitAttribute()
     {
         $createdAt = Carbon::parse($this->attributes['init_at']);
-        return $createdAt->format('d/m/Y H:i');
+        return $createdAt->format('d/m/Y, \à\s\ H:i');
     }
 
     public function getEndAttribute()
     {
         $createdAt = Carbon::parse($this->attributes['end_at']);
-        return $createdAt->format('d/m/Y H:i');
+        return $createdAt->format('d/m/Y, \à\s\ H:i');
     }
 
     public function getCategoriesAttribute()
